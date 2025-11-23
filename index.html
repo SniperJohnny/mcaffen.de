@@ -3,74 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Affen Server</title>
-    <style>
-        body {
-            background-color: #232323;
-            color: #EDEDED;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background: #2e2e2e;
-            padding: 30px 0 10px 0;
-        }
-        .logo {
-            width: 150px;
-            height: 150px;
-            object-fit: contain;
-            margin-bottom: 15px;
-        }
-        h1 {
-            margin: 10px 0;
-            font-size: 2.8em;
-        }
-        .subtext {
-            color: #bada55;
-            font-size: 1.4em;
-            margin-bottom: 20px;
-        }
-        main {
-            margin-top: 30px;
-            padding: 20px;
-        }
-        .ip-box {
-            display: inline-block;
-            background: #333;
-            padding: 15px 30px;
-            border-radius: 12px;
-            font-size: 1.3em;
-            margin-top: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-        footer {
-            margin-top: 40px;
-            color: #888;
-            font-size: 0.98em;
-        }
-    </style>
+    <title>McAffen.de – Dein Minecraft Server</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="Minecraft-Affen.png">
 </head>
 <body>
-    <header>
-        <!-- Logo einfügen: siehe Anleitung unten -->
-        <img src="Minecraft-Affen.png" class="logo" alt="Minecraft Affen Logo">
-        <h1>Minecraft Affen Server</h1>
-        <div class="subtext">Dein Platz für echte Minecraft-Affenaction 🐵</div>
-    </header>
-    <main>
-        <h2>Willkommen auf unserem Server!</h2>
-        <p>
-            Bau, erkunde und spiele gemeinsam mit anderen Minecraft-Fans.<br>
-            Unsere Community freut sich auf dich!
-        </p>
-        <div class="ip-box">
-            <strong>Server-IP:</strong> <span>mcaffen.de</span>
-        </div>
-    </main>
+  <div class="container">
+    <img class="logo" src="Minecraft-Affen.png" alt="Minecraft Affen Logo">
+    <h1>Willkommen bei <span class="highlight">McAffen.de</span></h1>
+    <p class="subtitle">Der einzigartige Minecraft-Server für echte Affen & Fans!</p>
+    <div class="server-ip">
+      <span>Server-IP:</span>
+      <input type="text" value="play.McAffen.de" id="serverIp" readonly>
+      <button onclick="copyIP()">Kopieren</button>
+    </div>
+    <a href="minecraft://?addExternalServer=McAffen.de|play.McAffen.de" class="join-btn">Jetzt beitreten!</a>
     <footer>
-        &copy; 2025 Minecraft Affen. Nicht offiziell mit Mojang/Minecraft verbunden.
+      <small>© 2025 McAffen.de | Minecraft Server aus Leidenschaft</small>
     </footer>
+  </div>
+  <script>
+      function copyIP() {
+        const ipField = document.getElementById('serverIp');
+        ipField.select();
+        ipField.setSelectionRange(0, 99999);
+        document.execCommand('copy');
+        alert("Server-IP kopiert: " + ipField.value);
+      }
+  </script>
 </body>
 </html>
