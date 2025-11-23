@@ -3,33 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McAffen.de – Dein Minecraft Server</title>
+    <title>McAffen.de – Minecraft Server</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="Minecraft-Affen.png">
 </head>
 <body>
-  <div class="container">
-    <img class="logo" src="Minecraft-Affen.png" alt="Minecraft Affen Logo">
-    <h1>Willkommen bei <span class="highlight">McAffen.de</span></h1>
-    <p class="subtitle">Der einzigartige Minecraft-Server für echte Affen & Fans!</p>
-    <div class="server-ip">
-      <span>Server-IP:</span>
-      <input type="text" value="play.McAffen.de" id="serverIp" readonly>
-      <button onclick="copyIP()">Kopieren</button>
-    </div>
-    <a href="minecraft://?addExternalServer=McAffen.de|play.McAffen.de" class="join-btn">Jetzt beitreten!</a>
+    <!-- Navbar -->
+    <nav>
+        <div class="logo-area">
+            <img src="Minecraft-Affen.png" alt="Minecraft Affen Logo" class="logo" />
+            <span class="nav-title">McAffen.de</span>
+        </div>
+        <ul class="navbar">
+            <li><a href="#">Home</a></li>
+            <li class="has-sub">
+                <a href="#">Mehr <span class="arrow">&#x25BC;</span></a>
+                <ul class="submenu">
+                    <li><a href="#regelwerk">Regelwerk</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+            </li>
+            <li><a href="#server">Zur Server-IP</a></li>
+        </ul>
+    </nav>
+    <!-- Header -->
+    <header>
+        <img src="Minecraft-Affen.png" alt="Minecraft Affen Logo" class="hero-logo" />
+        <h1>Willkommen auf <span class="highlight">McAffen.de</span></h1>
+        <p class="subtitle">Minecraft-Server – Verrückt, verspielt & einzigartig</p>
+        <div class="server-ip-block" id="server">
+            <span class="ip-label">Server-IP:</span>
+            <input type="text" id="serverIp" value="play.McAffen.de" readonly>
+            <button onclick="copyIP()">Kopieren</button>
+        </div>
+        <a href="minecraft://?addExternalServer=McAffen.de|play.McAffen.de" class="join-btn">Minecraft öffnen & beitreten!</a>
+    </header>
+    <!-- Farbbunte Sectionen / mini Unterseiten -->
+    <main>
+        <section class="colorblock rules" id="regelwerk">
+            <h2>Regelwerk 📜</h2>
+            <p>Kurz & knapp: <br />Keine Beleidigungen, kein Griefing, Spaß haben! 💚<br />Das ausführliche Regelwerk findest du <a href="#">hier</a>.</p>
+        </section>
+        <section class="colorblock team" id="team">
+            <h2>Team 👥</h2>
+            <ul class="team-list">
+                <li><span>McAffe13</span> – Owner, Affen-Dompteur</li>
+                <li><span>BananaKing</span> – Admin</li>
+                <li><span>CocoNerd</span> – Supporter</li>
+                <!-- Trage beliebig mehr Team-Member ein! -->
+            </ul>
+        </section>
+        <section class="colorblock kontakt" id="kontakt">
+            <h2>Kontakt 📧</h2>
+            <p>Du hast Fragen oder brauchst Hilfe? <br><a href="mailto:support@mcaffen.de">support@mcaffen.de</a> <br>oder im Spiel /discord.</p>
+        </section>
+    </main>
     <footer>
-      <small>© 2025 McAffen.de | Minecraft Server aus Leidenschaft</small>
+        <small>© 2025 McAffen.de | <a href="#regelwerk">Regelwerk</a> | <a href="#team">Team</a> | <a href="#kontakt">Kontakt</a></small>
     </footer>
-  </div>
-  <script>
-      function copyIP() {
-        const ipField = document.getElementById('serverIp');
-        ipField.select();
-        ipField.setSelectionRange(0, 99999);
-        document.execCommand('copy');
-        alert("Server-IP kopiert: " + ipField.value);
-      }
-  </script>
+    <script>
+        function copyIP() {
+            const ipField = document.getElementById('serverIp');
+            ipField.select();
+            ipField.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+            alert("Server-IP kopiert: " + ipField.value);
+        }
+        // Navbar dropdown auf Mobile öffnen
+        document.querySelectorAll('.has-sub').forEach(el => {
+            el.addEventListener('click', function(e) {
+                if(window.innerWidth < 900){
+                    this.classList.toggle('open');
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
