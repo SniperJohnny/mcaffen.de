@@ -3,119 +3,413 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>McAffen.de – Dein Minecraft Server</title>
-    <meta name="description" content="McAffen.de – Der verrückteste Minecraft-Server mit aktiver Community. Werde jetzt ein Affe!">
+    <title>McAffen.de · Der Minecraft-Affenserver</title>
+    <meta name="description" content="McAffen.de – Der verrückteste Minecraft-Server für Blockliebhaber und Banane begeisterte!">
     <link rel="icon" href="Minecraft-Affen.png" type="image/png">
-    <!-- Google Fonts Minecraft-Look -->
+    <!-- Fancy Minecraft Font Style -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
+    <!-- Material Icons für animierte Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+    <style>
+        :root {
+            --main-bg: linear-gradient(135deg, #36e2ec 0%, #13bbd7 70%, #004e76 100%);
+            --main-fg: #032736;
+            --accent: #00d9d9;
+            --primary: #27b1ec;
+            --card-bg: rgba(255,255,255,0.93);
+            --card-shadow: 0 8px 34px #15e4e055;
+            --highlight: #00d084;
+            --glass: rgba(255,255,255,0.60);
+        }
+        html[data-theme='dark'] {
+            --main-bg: linear-gradient(135deg, #141f27 10%, #0d4660 90%);
+            --main-fg: #e2fdfe;
+            --accent: #a5faff;
+            --primary: #10aef9;
+            --card-bg: rgba(27,33,41,0.96);
+            --glass: rgba(16,37,55,0.6);
+        }
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 18px 60px 18px;
+            background: var(--main-bg);
+            color: var(--main-fg);
+            transition: background 0.35s, color 0.3s;
+            position: relative;
+        }
+        .toggle-btn {
+            position: fixed;
+            right: 22px;
+            top: 16px;
+            z-index: 120;
+            font-size: 1.2em;
+            background: linear-gradient(80deg,var(--accent),var(--primary));
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            padding: .5em .7em;
+            cursor: pointer;
+            box-shadow: 0 2px 16px #21eaff32;
+        }
+        .toggle-btn:hover {
+            background: linear-gradient(90deg, var(--primary) 65%, var(--accent) 100%);
+            transform: scale(1.12) rotate(-9deg);
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(30, 80, 117, 0.97);
+            border-radius: 0 0 18px 18px;
+            box-shadow: 0 7px 36px #19aada52;
+            padding: .4em 2em .3em 1em;
+            margin-bottom: 18px;
+        }
+        .logo-nav {
+            display: flex;
+            align-items: center;
+            gap: .7em;
+        }
+        .logo {
+            width: 56px; height: 56px;
+            border-radius: 15px;
+            box-shadow: 0 2px 12px #13f4ff66;
+            border: 2.5px solid var(--primary);
+            background: #fff;
+            object-fit: cover;
+        }
+        .nav-title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2em;
+            color: var(--primary);
+            letter-spacing: 2px;
+            text-shadow: 0px 2px 16px #0ae8d377;
+            font-weight: bold;
+        }
+        .navbar {
+            list-style: none;
+            display: flex;
+            gap: 1.1em;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar li { margin: 0; }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.11em;
+            font-weight: bold;
+            padding: .5em 1.1em;
+            border-radius: 9px;
+            background: rgba(0,0,0,0.02);
+            transition: background 0.14s, color .12s, transform 0.22s;
+        }
+        .navbar a:hover, .navbar .active {
+            background: linear-gradient(95deg, var(--primary) 60%, var(--accent) 100%);
+            color: #073343;
+            transform: translateY(-3px) scale(1.06);
+        }
+        .navbar .discord {
+            background: linear-gradient(90deg,#5d8dee 60%,#27e4e0 100%)!important;
+            color: #fff!important;
+            box-shadow: 0 2px 8px #1accffbb inset;
+        }
+        .navbar .discord:hover {
+            color: #21243a !important;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo-main {
+            max-width: 110px;
+            border-radius: 19px;
+            margin: 10px auto 6px auto;
+            display: block;
+            border: 2px solid var(--primary);
+            box-shadow: 0 6px 24px #15e4e089, 0 1px 2px #9ef4;
+            background: var(--glass);
+            transition: box-shadow .22s, border .2s;
+        }
+        .logo-main:hover {
+            box-shadow: 0 14px 32px 0 var(--accent), 0 6px 18px #1adcef33;
+            border: 2.5px solid var(--highlight);
+        }
+        h1 {
+            font-family: 'Press Start 2P', monospace;
+            color: var(--accent);
+            font-size: 2.18em;
+            margin-bottom: .25em;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 16px var(--primary), 0 1px 2px #fff8;
+        }
+        .subtitle {
+            font-size: 1.17rem;
+            color: #155770;
+            margin-bottom: 18px;
+        }
+        .mc-ip {
+            display: inline-block;
+            padding: .48em 1em;
+            border-radius: 13px;
+            background: var(--glass);
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.13em;
+            border: 1.5px solid var(--primary);
+            margin: 0 7px 0 7px;
+            cursor: pointer;
+        }
+        .fancy-btn {
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            color: #fff;
+            border: none;
+            border-radius: 13px;
+            padding: .56em 2.2em;
+            font-size: 1.10em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 6px 26px #30eaff44;
+            margin-left: .7em;
+            margin-bottom: 1em;
+            transition: background 0.2s, transform 0.18s, box-shadow .22s;
+        }
+        .fancy-btn:hover {
+            background: linear-gradient(95deg, var(--primary), var(--accent));
+            color: #fff;
+            transform: scale(1.07) translateY(-3px);
+            box-shadow: 0 10px 38px #38ebff85;
+        }
+        .stat-bar {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+            filter: drop-shadow(0 2px 8px var(--primary));
+        }
+        .stat {
+            background: linear-gradient(120deg, var(--glass) 70%, #fff1 100%);
+            color: var(--accent);
+            border-radius: 12px;
+            padding: 16px 18px;
+            min-width: 120px;
+            text-align: center;
+            font-size: 1.33rem;
+            font-weight: 700;
+            box-shadow: 0 2px 16px var(--card-shadow), 0 1px 2px #eaf3fa;
+            margin-bottom: 6px;
+        }
+
+        /* MC CARDS */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 46px;
+            margin-bottom: 30px;
+            margin-top: 8px;
+        }
+        @media (max-width: 900px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
+        .card {
+            background: var(--card-bg);
+            box-shadow: var(--card-shadow);
+            border-radius: 17px;
+            padding: 32px 18px 26px 18px;
+            text-align: center;
+            transition: transform 0.22s, box-shadow 0.23s, background 0.22s;
+            border: 2px solid transparent;
+            margin-bottom: 30px;
+        }
+        .card:active, .card:focus { background: #edf8fc; }
+        .card:hover {
+            transform: translateY(-9px) scale(1.035) rotate(-1.5deg);
+            box-shadow: 0 18px 46px 0 var(--primary), 0 6px 23px var(--card-shadow);
+            border: 2.5px solid var(--highlight);
+            background: linear-gradient(115deg, var(--card-bg) 80%, #e3faff 100%);
+        }
+        .team-list {
+            display: flex;
+            gap: 21px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .team-member {
+            width: 122px;
+            text-align: center;
+            padding: 12px 3px;
+            border-radius: 14px;
+            background: var(--glass);
+            box-shadow: 0 2px 12px #bbe0f433;
+            color: var(--primary);
+        }
+        .team-member span {
+            display: block; font-weight: 700; margin-bottom: 1px;
+        }
+        .team-member div { color: #667; }
+        .team-member:hover {
+            background: #f2feff;
+            box-shadow: 0 5px 19px #15eaff35;
+            transform: scale(1.04) rotate(-1deg);
+        }
+        /* Kontakt und Discord */
+        .card-contact { border-left: 7px solid var(--primary);}
+        .card-discord { border-left: 7px solid #5d8dee; background: #e5f2fdcc !important;}
+        .discord-btn {
+            margin-top: .8em;
+            background: linear-gradient(90deg,#5d8dee 60%,#27e4e0 100%);
+            color: #fff!important;
+            border-radius: 13px;
+            font-size: 1.13em;
+            box-shadow: 0 5px 18px #46aaff55;
+            border: none;
+            padding: .64em 2.24em;
+            font-weight: bold;
+        }
+        .discord-btn:hover {
+            background: linear-gradient(90deg,#27e4e0 60%,#5d8dee 100%);
+            color: #20273f;
+            border-bottom: 4px solid #47aee0;
+            box-shadow: 0 18px 43px #33b2f996;
+        }
+        footer {
+            background: #072242ea;
+            color: #e8fafd;
+            border-radius: 20px 20px 0 0;
+            margin-top: 3.2em;
+            padding: 1em 0 .7em 0;
+            text-align: center;
+            font-size: 1.04em;
+        }
+        footer a {
+            color: #bcefff;
+            text-decoration: none;
+            font-weight: bold;
+            opacity: 0.84;
+        }
+        footer a:hover {
+            color: var(--accent);
+            opacity: 1;
+        }
+        @media (max-width: 700px) {
+            .main-grid, .stat-bar { gap: 8px;}
+            nav, .navbar{flex-direction:column; align-items:flex-start;}
+            .navbar{gap:.2em;}
+            .main-grid { padding: 0;}
+        }
+        @media (max-width: 550px) {
+            .logo { width:36px;height:36px;}
+            .nav-title { font-size: 1.07em;}
+            header h1 { font-size: 1.12em;}
+            .logo-main { max-width: 66px;}
+            .card {padding: 1.1em .1em;}
+        }
+    </style>
 </head>
 <body>
-    <button class="toggle-btn" id="toggleMode" onclick="toggleTheme()">🌙 Dark Mode</button>
+    <button class="toggle-btn" id="toggleMode" onclick="toggleTheme()">🌙</button>
     <nav>
         <div class="logo-nav">
             <img src="Minecraft-Affen.png" alt="McAffen Logo" class="logo" />
             <span class="nav-title">McAffen.de</span>
         </div>
         <ul class="navbar">
-            <li><a href="#home" class="nav-btn">Home</a></li>
-            <li><a href="#regelwerk" class="nav-btn">Regelwerk</a></li>
-            <li><a href="#team" class="nav-btn">Team</a></li>
-            <li><a href="#kontakt" class="nav-btn">Kontakt</a></li>
-            <li><a href="#discord" class="nav-btn discord">Discord</a></li>
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#regelwerk">Regelwerk</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+            <li><a href="#discord" class="discord">Discord</a></li>
         </ul>
     </nav>
+    <!-- HEADER / Hero -->
     <header id="home">
-        <img src="Minecraft-Affen.png" alt="McAffen Affen Logo" class="hero-logo" />
-        <h1>Willkommen bei <span class="highlight">McAffen.de</span></h1>
-        <p class="subtitle">Der wildeste Minecraft Server für Bananen-Fans und Block-Buddies 🍌</p>
-        <div class="server-ip-block">
-            <span class="ip-label">Server-IP:</span>
-            <input type="text" id="serverIp" value="play.McAffen.de" readonly>
-            <button class="fancy-btn" onclick="copyIP(this)">Kopieren</button>
-        </div>
-        <a href="minecraft://?addExternalServer=McAffen.de|play.McAffen.de" class="fancy-btn join-btn">Minecraft öffnen & beitreten!</a>
+        <img src="Minecraft-Affen.png" alt="McAffen Affe" class="logo-main" />
+        <h1>Willkommen auf McAffen.de!</h1>
+        <p class="subtitle">Der Minecraft-Server für Affen, Bananen und Spaß – join jetzt!</p>
+        <span class="mc-ip" id="mc-ip">play.McAffen.de</span>
+        <button class="fancy-btn" onclick="copyIP(this)">IP kopieren</button>
     </header>
-    <main>
-        <section class="colorblock rules" id="regelwerk">
+    <!-- Main grid für Cards -->
+    <div class="main-grid">
+        <section class="card" id="regelwerk">
             <h2>Regelwerk 📜</h2>
-            <ul>
-                <li>Kein Griefing, kein Hacking, bleib ein feiner Affe!</li>
-                <li>Sei nett zu anderen Spielern 🍌</li>
-                <li>Folge den Anweisungen des Teams</li>
-                <li>Mehr Details findest du <a href="#">hier</a></li>
+            <ul style="text-align:left;max-width:340px;margin:16px auto 0 auto;font-size:1.08rem;line-height:1.7;">
+                <li>Kein Griefing, kein Hacking – bleib ein feiner Affe!</li>
+                <li>Respektvoll, freundlich, Helfen => Spaß!</li>
+                <li>Folge dem Team & glaube an die Banane 🍌</li>
+                <li>Alle Details findest du <a href="#">hier</a>.</li>
             </ul>
         </section>
-        <section class="colorblock team" id="team">
-            <h2>Unser Team 👥</h2>
-            <ul class="team-list">
-                <li><b>McAffe13</b> – Owner & Banankönig</li>
-                <li><b>Foox</b> – Admin</li>
-                <li><b>Quenten</b> – Support</li>
-                <li><b>Phoenix</b> – Moderation</li>
-                <li><b>SniperJohnny_yt</b> – Helfer</li>
-            </ul>
+        <section class="card" id="team">
+            <h2>Das Team 👑</h2>
+            <div class="team-list">
+                <div class="team-member"><span>McAffe13</span><div>Owner & Banankönig</div></div>
+                <div class="team-member"><span>Foox</span><div>Admin</div></div>
+                <div class="team-member"><span>Quenten</span><div>Support</div></div>
+                <div class="team-member"><span>Phoenix</span><div>Moderation</div></div>
+                <div class="team-member"><span>SniperJohnny_yt</span><div>Helfer</div></div>
+            </div>
         </section>
-        <section class="colorblock kontakt" id="kontakt">
-            <h2>Kontakt 📧</h2>
-            <p>
-                Fragen, Bugs oder Vorschläge?<br>
-                Schreib uns an <a href="mailto:support@mcaffen.de">support@mcaffen.de</a> <br>
-                <span style="color:#16aaff">Oder Ingame: /contact</span>
-            </p>
-        </section>
-        <section class="colorblock discord" id="discord">
-            <h2>Discord 💬</h2>
-            <p>Tritt unserer Community bei und werde ein echter Minecraft-Affe!</p>
-            <a href="https://discord.gg/DEININVITELINK" class="fancy-btn discord-btn" target="_blank">
-                Zum Discord
-            </a>
-        </section>
-    </main>
+    </div>
+    <section class="card card-contact" id="kontakt">
+        <h2>Kontakt 📧</h2>
+        <p>
+            Fragen oder Feedback?<br>
+            Schreibe uns an <a href="mailto:support@mcaffen.de">support@mcaffen.de</a><br>
+            Ingame: <code>/contact</code>
+        </p>
+    </section>
+    <section class="card card-discord" id="discord">
+        <h2>Discord 💬</h2>
+        <p>Werde Teil der Affenbande auf unserem Discord!</p>
+        <a href="https://discord.gg/DEININVITELINK" class="discord-btn" target="_blank">Zum Discord</a>
+    </section>
     <footer>
-        <small>© 2025 McAffen.de | <a href="#regelwerk">Regelwerk</a> | <a href="#team">Team</a> | <a href="#kontakt">Kontakt</a> | <a href="#discord">Discord</a></small>
+        <small>© 2025 McAffen.de | <a href="#regelwerk">Regelwerk</a> | <a href="#team">Team</a> | 
+            <a href="#kontakt">Kontakt</a> | <a href="#discord">Discord</a>
+        </small>
     </footer>
     <script>
-        // DARK/LIGHT MODE
-        function toggleTheme(){
-            var html = document.documentElement;
-            var btn = document.getElementById('toggleMode');
-            if(html.getAttribute('data-theme')==='dark'){
-                html.setAttribute('data-theme','light');
-                btn.innerHTML="🌙 Dark Mode";
-                localStorage.setItem('mcaffen_theme','light');
-            } else {
-                html.setAttribute('data-theme','dark');
-                btn.innerHTML="☀️ Light Mode";
-                localStorage.setItem('mcaffen_theme','dark');
-            }
+        // DARK MODE
+        function toggleTheme() {
+            let html = document.documentElement;
+            let btn = document.getElementById('toggleMode');
+            let isDark = html.getAttribute('data-theme')==='dark';
+            html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            btn.innerHTML = isDark ? "🌙" : "☀️";
+            localStorage.setItem('mcaffen_theme', isDark ? "light" : "dark");
         }
-        (function(){
-            var stored = localStorage.getItem('mcaffen_theme');
-            if(stored==='dark'){
-                document.documentElement.setAttribute('data-theme','dark');
-                document.getElementById('toggleMode').innerHTML="☀️ Light Mode";
+        // Beim Laden Theme setzen
+        (function() {
+            let theme = localStorage.getItem('mcaffen_theme');
+            if(theme==='dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('toggleMode').innerHTML="☀️";
             }
         })();
-
         // IP kopieren
         function copyIP(btn) {
-            const ipField = document.getElementById('serverIp');
-            ipField.select();
-            ipField.setSelectionRange(0, 99999);
+            let mcIp = document.getElementById('mc-ip');
+            let range = document.createRange();
+            range.selectNode(mcIp);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
             document.execCommand('copy');
-            btn.innerText = "Kopiert!";
-            setTimeout(() => btn.innerText = "Kopieren", 1200);
+            window.getSelection().removeAllRanges();
+            btn.innerHTML = "Kopiert!";
+            setTimeout(()=>btn.innerHTML="IP kopieren",1200);
         }
-        // Smooth scroll for anchor links (Navigation)
-        document.querySelectorAll('a.nav-btn').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href').substring(1);
-                const section = document.getElementById(targetId);
-                if(section){
-                  e.preventDefault();
-                  section.scrollIntoView({behavior: 'smooth'});
-                }
+        // Smooth scroll
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const t = document.querySelector(this.getAttribute('href'));
+                if(t) { e.preventDefault(); t.scrollIntoView({behavior:"smooth"});}
             });
         });
     </script>
