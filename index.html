@@ -1,78 +1,100 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MoKoCraft — Minecraft Server</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McAffen.de – Minecraft Server</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="Minecraft-Affen.png">
 </head>
 <body>
-  <header class="hero">
-    <div class="hero-inner">
-      <img class="mascot" src="assets/Minecraft-Affen.png" alt="Server-Maskottchen" />
-      <div class="title-block">
-        <h1>Willkommen auf <span class="accent">MoKoCraft</span></h1>
-        <p class="subtitle">Dein freundlicher Minecraft-Server — baue, kämpfe, entdecke!</p>
-        <div class="actions">
-          <a class="btn primary" href="#join">Jetzt beitreten</a>
-          <a class="btn" href="#info">Server Info</a>
-          <a class="btn" href="#rules">Regeln</a>
+    <!-- Fancy animierter Türkis-Blau Hintergrund -->
+    <div class="animated-bg"></div>
+    <!-- Navbar -->
+    <nav>
+        <div class="logo-nav">
+            <img src="Minecraft-Affen.png" alt="Minecraft Affen Logo" class="logo" />
+            <span class="nav-title">McAffen.de</span>
         </div>
-      </div>
-    </div>
-  </header>
-
-  <main class="container">
-    <section id="info" class="card">
-      <h2>Server Info</h2>
-      <ul class="info-list">
-        <li><strong>IP:</strong> <code>play.mcaffen.de</code></li>
-        <li><strong>Version:</strong> 1.20+</li>
-        <li><strong>Spielmodi:</strong> Survival, Minigames, Kreativ</li>
-      </ul>
-    </section>
-
-    <section id="rules" class="card">
-      <h2>Regeln</h2>
-      <ol class="rules">
-        <li>Kein Griefing oder unnötige Zerstörung.</li>
-        <li>Kein Hacken, Cheaten oder unerlaubte Mods.</li>
-        <li>Respektvoller Umgang mit allen Spielern.</li>
-        <li>Keine Beleidigungen, Spam oder rassistische Inhalte.</li>
-        <li>Kein Werbung machen ohne Erlaubnis.</li>
-        <li>Bauen nur in eigenen oder freigegebenen Gebieten.</li>
-        <li>Admins haben immer das letzte Wort.</li>
-      </ol>
-    </section>
-
-    <section id="features" class="card grid">
-      <div>
-        <h3>Community</h3>
-        <p>Freundliche Spieler, Discord-Events und tägliche Challenges.</p>
-      </div>
-      <div>
-        <h3>Rank & Belohnungen</h3>
-        <p>Ränge, Belohnungen und kosmetische Items über Fortschritt.</p>
-      </div>
-      <div>
-        <h3>Sichere Welt</h3>
-        <p>Backups, Anti-Grief Plugins und klares Regelwerk.</p>
-      </div>
-    </section>
-
-    <section id="join" class="card join-card">
-      <h2>So kannst du beitreten</h2>
-      <ol>
-        <li>Starte Minecraft (Version 1.20+).</li>
-        <li>Gebe die IP <code>play.mcaffen.de</code> ein.</li>
-        <li>Viel Spaß!</li>
-      </ol>
-      <a class="btn big primary" href="#">IP kopieren</a>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <small>© 2025 MoKoCraft — Viel Spaß beim Zocken!</small>
-  </footer>
+        <ul class="navbar">
+            <li><a href="#home" class="nav-btn">Home</a></li>
+            <li><a href="#regelwerk" class="nav-btn">Regelwerk</a></li>
+            <li><a href="#team" class="nav-btn">Team</a></li>
+            <li><a href="#kontakt" class="nav-btn">Kontakt</a></li>
+            <li><a href="#discord" class="nav-btn discord">Discord</a></li>
+        </ul>
+    </nav>
+    <!-- Hauptbereich -->
+    <header id="home">
+        <img src="Minecraft-Affen.png" alt="Minecraft Affen Logo" class="hero-logo" />
+        <h1>Willkommen bei <span class="highlight">McAffen.de</span></h1>
+        <p class="subtitle">Dein einzigartiger Minecraft-Server für alle Affen-Fans</p>
+        <div class="server-ip-block">
+            <span class="ip-label">Server-IP:</span>
+            <input type="text" id="serverIp" value="play.McAffen.de" readonly>
+            <button class="fancy-btn" onclick="copyIP()">Kopieren</button>
+        </div>
+        <a href="minecraft://?addExternalServer=McAffen.de|play.McAffen.de" class="fancy-btn join-btn">Minecraft öffnen & beitreten!</a>
+    </header>
+    <main>
+        <section class="colorblock rules" id="regelwerk">
+            <h2>Regelwerk 📜</h2>
+            <ul>
+                <li>Fairplay – kein Griefing, keine Hacks</li>
+                <li>Respektvoller Umgang, Spaß für alle</li>
+                <li>Folge den Anweisungen des Teams</li>
+                <li>Erweitertes Regelwerk <a href="#">HIER</a></li>
+            </ul>
+        </section>
+        <section class="colorblock team" id="team">
+            <h2>Unser Team 👥</h2>
+            <ul class="team-list">
+                <li><b>McAffe13</b> – Owner</li>
+                <li><b>BananaKing</b> – Admin</li>
+                <li><b>CocoNerd</b> – Supporter</li>
+            </ul>
+        </section>
+        <section class="colorblock kontakt" id="kontakt">
+            <h2>Kontakt 📧</h2>
+            <p>
+                Du hast Fragen? <br>
+                Schreib uns an <a href="mailto:support@mcaffen.de">support@mcaffen.de</a> <br>
+                <span style="color:#16aaff">Oder ingame: /contact</span>
+            </p>
+        </section>
+        <section class="colorblock discord" id="discord">
+            <h2>Discord 💬</h2>
+            <p>Tritt unserer Community bei:</p>
+            <a href="https://discord.gg/DEININVITELINK" class="fancy-btn discord-btn" target="_blank">
+                Zum Discord
+            </a>
+        </section>
+    </main>
+    <footer>
+        <small>© 2025 McAffen.de | <a href="#regelwerk">Regelwerk</a> | <a href="#team">Team</a> | <a href="#kontakt">Kontakt</a> | <a href="#discord">Discord</a></small>
+    </footer>
+    <script>
+        // Copy IP
+        function copyIP() {
+            const ipField = document.getElementById('serverIp');
+            ipField.select();
+            ipField.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+            const btn = event.target;
+            btn.textContent = "Kopiert!";
+            setTimeout(() => btn.textContent = "Kopieren", 1500);
+        }
+        // Smooth scroll for anchor links:
+        document.querySelectorAll('a.nav-btn').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href').substring(1);
+                const section = document.getElementById(targetId);
+                if(section){
+                  e.preventDefault();
+                  section.scrollIntoView({behavior: 'smooth'});
+                }
+            });
+        });
+    </script>
 </body>
 </html>
